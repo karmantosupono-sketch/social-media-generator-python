@@ -1,10 +1,3 @@
-"""Add schemas and update models
-
-Revision ID: daded42c90b2
-Revises: 
-Create Date: 2025-07-27 15:53:53.439122
-
-"""
 from typing import Sequence, Union
 
 from alembic import op

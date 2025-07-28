@@ -1,0 +1,63 @@
+//post
+curl -X 'POST' \
+  'http://localhost:8000/api/batch-jobs/campaigns/016c7c05-c582-4fd7-a87f-f6ca5b2d4824/generate-batch' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc1MzY1NzQ5NX0.ewhriVfDMD_j3OU9mZzB1sW3k0TKdNSWL9p8xBHnMLo' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "name": "First Batch Test",
+  "posts": [
+    {
+      "title": "Innovative Gadget Review",
+      "topic": "Product Review",
+      "brief": "Review our latest tech gadget with pros, cons, and first impressions.",
+      "generate_caption": true,
+      "generate_image": true
+    }
+  ]
+}'
+
+
+//test langsung api gemini image
+curl -s -X POST \
+  "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent" \
+  -H "x-goog-api-key: AIzaSyCeqw7Te6qCE1v1gc5fGXmI3h-whHHbUdk" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "contents": [{
+      "parts": [
+        {"text": "Hi, can you create a 3d rendered image of a pig with wings and a top hat flying over a happy futuristic scifi city with lots of greenery?"}
+      ]
+    }],
+    "generationConfig":{"responseModalities":["TEXT","IMAGE"]}
+  }' \
+| grep -o '"data": "[^"]*"' \
+| cut -d'"' -f4 \
+| base64 --decode \
+> gemini-native-image.png
+
+
+//login
+curl -X POST \
+  'http://localhost:8000/api/auth/login' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "username": "admin",
+    "password": "password"
+  }'
+
+
+//generate campaign
+curl -X POST \
+  'http://localhost:8000/api/campaigns/' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc1MzYyODEzOX0.bY5STnYjJW0Ww498H6Z8BJiCqPv1P75bsnic5lKJXGI' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "name": "Test Campaign",
+    "brand_name": "My Awesome Brand",
+    "description": "A test campaign for social media posts",
+    "target_audience": "Tech enthusiasts",
+    "tone_id": "friendly"
+  }'                                                
