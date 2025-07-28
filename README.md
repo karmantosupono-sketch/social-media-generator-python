@@ -36,7 +36,7 @@ Ikuti langkah-langkah berikut untuk menyiapkan lingkungan pengembangan:
 
    ```bash
    git clone <URL_REPOSITORI_ANDA>
-   cd <NAMA_FOLDER_REPOSITORI>
+   cd social-media-generator-python
    ```
 
 2. **Buat dan Aktifkan Virtual Environment:** Menggunakan virtual environment sangat disarankan untuk mengisolasi dependensi proyek ini.
