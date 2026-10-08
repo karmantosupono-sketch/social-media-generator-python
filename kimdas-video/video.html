@@ -5,7 +5,7 @@
 <title>Video Ta'ziyah KIMDAS</title>
 <link rel="stylesheet" href="fonts/fonts.css">
 <style>
-/* Vertical 1080x1920 stage. Every frame is a pure function of time t: render(t). */
+/* Vertical 1080x1920 stage. Every frame is a pure function of time t: render(t). No italics anywhere. */
 :root {
   --ink: #13261c;
   --deep: #0f3323;
@@ -13,12 +13,14 @@
   --leaf: #2f9a5f;
   --gold: #c9a24a;
   --gold-soft: #e8d39b;
-  --cream: #f6f0e3;
   --paper: #fbf8f1;
   --muted: #6d7b72;
-  --stone: #b9b8ad;
   --display: 'Playfair Display', Georgia, serif;
   --body: 'Poppins', 'DejaVu Sans', sans-serif;
+  --wa-head: #0f5b49;
+  --wa-bg: #ece5dd;
+  --wa-out: #d9fdd3;
+  --tick: #34b7f1;
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; background: #000; }
@@ -26,36 +28,73 @@ body { font-family: var(--body); color: var(--ink); overflow: hidden; }
 #stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--deep); transform-origin: 0 0; }
 .scene { position: absolute; inset: 0; opacity: 0; }
 .abs { position: absolute; }
-[data-a] { will-change: opacity, transform; }
+em { font-style: normal; }
 
-.eyebrow { font: 600 30px/1 var(--body); letter-spacing: .22em; text-transform: uppercase; color: var(--gold); }
-.cap { font: 600 60px/1.18 var(--display); color: #fff; text-wrap: balance; }
-.cap em { font-style: italic; font-weight: 500; color: var(--gold-soft); }
-.top { position: absolute; left: 80px; right: 80px; top: 110px; }
+.eyebrow { font: 600 30px/1 var(--body); letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+.cap { font: 700 58px/1.2 var(--display); color: #fff; text-wrap: balance; }
+.cap em { color: var(--gold-soft); }
+.top { position: absolute; left: 80px; right: 80px; top: 100px; }
 .top > * { position: absolute; left: 0; right: 0; top: 0; }
-.top .cap { top: 58px; }
-.note { font: 400 34px/1.5 var(--body); color: rgba(255,255,255,.82); }
+.top .cap { top: 54px; }
+.note { font: 400 34px/1.5 var(--body); color: rgba(255,255,255,.85); }
 
-/* phone chat */
-.phone { position: absolute; left: 120px; top: 420px; width: 840px; height: 1380px; border-radius: 64px; background: #0a1a12; padding: 18px; box-shadow: 0 40px 90px rgba(0,0,0,.45); }
-.screen { width: 100%; height: 100%; border-radius: 48px; overflow: hidden; background: #efe7da; display: flex; flex-direction: column; }
-.chat-head { position: relative; z-index: 2; height: 132px; background: var(--green); display: flex; align-items: center; gap: 22px; padding: 26px 30px 0; color: #fff; flex: none; }
-.chat-head img, .chat-head .av { width: 78px; height: 78px; border-radius: 50%; background: #fff; flex: none; }
-.chat-head .av { display: grid; place-items: center; color: var(--green); font: 600 36px var(--body); background: var(--gold-soft); }
-.chat-head b { display: block; font: 600 34px/1.2 var(--body); }
-.chat-head span { font: 400 24px/1.2 var(--body); opacity: .8; }
-.msgs { flex: 1; min-height: 0; padding: 28px 26px; display: flex; flex-direction: column; gap: 18px;
-  background-image: radial-gradient(rgba(29,90,62,.07) 2px, transparent 2px); background-size: 34px 34px; }
-.b { flex: none; max-width: 82%; padding: 18px 24px 14px; border-radius: 26px; font: 400 31px/1.42 var(--body); color: var(--ink); background: #fff; box-shadow: 0 2px 2px rgba(0,0,0,.06); position: relative; }
-.b.in { align-self: flex-start; border-top-left-radius: 8px; }
-.b.out { align-self: flex-end; background: #d6f0c9; border-top-right-radius: 8px; }
-.b small { display: block; text-align: right; font-size: 21px; color: var(--muted); margin-top: 4px; }
+/* ---- phone ---- */
+.phone-wrap { position: absolute; left: 140px; top: 440px; width: 800px; height: 1400px; }
+.owner { position: absolute; left: 0; right: 0; top: -84px; display: flex; justify-content: center; }
+.owner span { display: inline-flex; align-items: center; gap: 14px; padding: 10px 30px 10px 12px; border-radius: 40px; font: 600 30px/1 var(--body); color: var(--ink); background: var(--gold-soft); }
+.owner i { width: 50px; height: 50px; font-size: 22px !important; border-radius: 50%; display: grid; place-items: center; font: 700 24px var(--body); font-style: normal; color: #fff; }
+.owner small { font: 500 24px var(--body); color: #5a5233; }
+.phone { position: absolute; inset: 0; border-radius: 76px; background: #111; padding: 16px; box-shadow: 0 0 0 4px #2b2b2b, 0 40px 90px rgba(0,0,0,.5); }
+.phone::before { content: ''; position: absolute; top: 34px; left: 50%; width: 34px; height: 34px; margin-left: -17px; border-radius: 50%; background: #050505; z-index: 5; }
+.phone::after { content: ''; position: absolute; right: -9px; top: 300px; width: 6px; height: 120px; border-radius: 3px; background: #2b2b2b; }
+.screen { position: relative; width: 100%; height: 100%; border-radius: 62px; overflow: hidden; background: var(--wa-bg); display: flex; flex-direction: column; }
+.status { flex: none; height: 76px; padding: 22px 46px 0; display: flex; justify-content: space-between; align-items: center; font: 600 26px var(--body); color: #fff; background: var(--wa-head); position: relative; z-index: 3; }
+.status svg { height: 24px; }
+.chat-head { position: relative; z-index: 3; flex: none; height: 112px; background: var(--wa-head); display: flex; align-items: center; gap: 18px; padding: 0 28px 0 18px; color: #fff; }
+.chat-head .back { font: 400 54px/1 var(--body); opacity: .95; margin-top: -6px; }
+.chat-head img, .chat-head .av { width: 76px; height: 76px; border-radius: 50%; background: #fff; flex: none; }
+.chat-head .av { display: grid; place-items: center; color: #fff; font: 600 34px var(--body); }
+.chat-head .who { flex: 1; min-width: 0; }
+.chat-head b { display: block; font: 600 33px/1.2 var(--body); }
+.chat-head span { font: 400 23px/1.2 var(--body); opacity: .85; }
+.chat-head .ico { display: flex; gap: 34px; }
+.msgs { flex: 1; min-height: 0; padding: 20px 22px; display: flex; flex-direction: column; gap: 14px; }
+.wall { position: absolute; inset: 0; z-index: 0; opacity: .5;
+  background-image: radial-gradient(circle at 12px 12px, rgba(80,70,50,.09) 3px, transparent 4px), radial-gradient(circle at 40px 44px, rgba(80,70,50,.07) 6px, transparent 7px);
+  background-size: 64px 64px; }
+.msgs > * { position: relative; z-index: 1; }
+.datechip { align-self: center; flex: none; padding: 8px 22px; border-radius: 14px; background: #e1f2fb; font: 500 22px var(--body); color: #54656f; text-transform: uppercase; letter-spacing: .04em; }
+.b { flex: none; max-width: 84%; padding: 12px 22px 10px; border-radius: 22px; font: 400 30px/1.42 var(--body); color: #111b21; background: #fff; box-shadow: 0 1px 1px rgba(0,0,0,.12); position: relative; }
+.b.in { align-self: flex-start; border-top-left-radius: 0; }
+.b.out { align-self: flex-end; background: var(--wa-out); border-top-right-radius: 0; }
+.b.in::before, .b.out::before { content: ''; position: absolute; top: 0; width: 18px; height: 18px; }
+.b.in::before { left: -16px; background: linear-gradient(225deg, #fff 50%, transparent 50%); }
+.b.out::before { right: -16px; background: linear-gradient(135deg, var(--wa-out) 50%, transparent 50%); }
+.b .from { display: block; font: 600 24px/1.3 var(--body); margin-bottom: 4px; }
+.b small { display: block; text-align: right; font-size: 20px; color: #667781; margin-top: 2px; }
+.b small b { color: var(--tick); font-weight: 600; letter-spacing: -.12em; }
 .b strong { font-weight: 600; }
-.b .hint { display: block; margin-top: 10px; font-size: 26px; color: var(--muted); }
-.b.big { font-size: 64px; font-weight: 600; padding: 6px 34px 10px; }
-.loc { width: 420px; height: 230px; border-radius: 16px; overflow: hidden; display: block; margin-bottom: 10px; }
+.b .hint { display: block; margin-top: 8px; font-size: 25px; color: #667781; }
+.b.big { font-size: 60px; font-weight: 600; padding: 8px 28px 8px; }
+.loc { width: 430px; height: 230px; border-radius: 12px; overflow: hidden; display: block; margin-bottom: 8px; }
+.inputbar { position: relative; z-index: 3; flex: none; height: 118px; display: flex; align-items: center; gap: 14px; padding: 0 16px 20px; background: var(--wa-bg); }
+.inputbar .field { flex: 1; height: 82px; border-radius: 42px; background: #fff; display: flex; align-items: center; gap: 20px; padding: 0 28px; font: 400 29px var(--body); color: #8696a0; }
+.inputbar .mic { width: 82px; height: 82px; border-radius: 50%; background: #1daa61; display: grid; place-items: center; }
 
-/* map frame */
+/* lock screen */
+.lock { flex: 1; position: relative; background: radial-gradient(120% 80% at 30% 20%, #2f5e52, #102a24 60%, #07120f); display: flex; flex-direction: column; align-items: center; color: #fff; }
+.lock .status { background: transparent; width: 100%; }
+.lock .clock { margin-top: 110px; font: 300 180px/1 var(--body); letter-spacing: .01em; }
+.lock .date { font: 500 34px var(--body); opacity: .85; margin-top: 18px; }
+.notif { position: absolute; left: 28px; right: 28px; top: 560px; border-radius: 34px; padding: 26px 30px; background: rgba(245,245,240,.94); color: #111; }
+.notif .app { display: flex; align-items: center; gap: 14px; font: 500 24px var(--body); color: #555; }
+.notif .app i { width: 38px; height: 38px; border-radius: 50%; background: #1daa61; display: grid; place-items: center; }
+.notif .app em { margin-left: auto; }
+.notif b { display: block; font: 600 32px/1.3 var(--body); margin-top: 14px; }
+.notif p { margin: 6px 0 0; font: 400 31px/1.42 var(--body); }
+.lock .hint { position: absolute; bottom: 70px; font: 500 26px var(--body); opacity: .7; }
+
+/* ---- map ---- */
 .frame { position: absolute; left: 60px; top: 400px; width: 960px; height: 1022px; border-radius: 28px; overflow: hidden; background: #fff; box-shadow: 0 30px 70px rgba(0,0,0,.4); }
 .bar { height: 62px; background: #eceae2; display: flex; align-items: center; gap: 12px; padding: 0 22px; }
 .bar i { width: 16px; height: 16px; border-radius: 50%; background: #cfcabb; }
@@ -72,67 +111,70 @@ body { font-family: var(--body); color: var(--ink); overflow: hidden; }
 .chips { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 20px; }
 .chip { display: inline-flex; align-items: center; gap: 12px; padding: 10px 22px; border-radius: 30px; background: rgba(255,255,255,.12); color: #fff; font: 500 27px/1.2 var(--body); }
 .dot { width: 22px; height: 22px; border-radius: 50%; display: inline-block; border: 3px solid #fff; }
-
-.quote { position: absolute; left: 90px; right: 90px; border-radius: 30px; padding: 36px 40px; background: var(--paper); }
-.quote .who { font: 600 26px/1.2 var(--body); color: var(--gold); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 14px; }
-.quote p { margin: 0; font: 400 36px/1.5 var(--body); }
-.quote.fam p { font: italic 500 44px/1.4 var(--display); color: var(--green); }
 </style>
 </head>
 <body>
 <div id="stage">
 
-  <!-- S1 · 0–9 · kabar datang -->
+  <!-- S1 · 0–9 · HP pengurus, layar kunci -->
   <section class="scene" data-a="0" data-b="9" data-f="0.8" style="background: radial-gradient(120% 70% at 50% 30%, #173b2a, #07130d);">
-    <div class="abs" style="left:0;right:0;top:470px;text-align:center;color:#fff;" data-a="0.4" data-f="1.2">
-      <div style="font:300 190px/1 var(--body);letter-spacing:.02em;">04.52</div>
-      <div style="font:400 36px/1 var(--body);opacity:.7;margin-top:22px;">Ahad, setelah subuh</div>
+    <div class="top">
+      <div class="eyebrow" data-a="0.3">Ahad, setelah subuh</div>
+      <div class="cap" data-a="4.6" data-f="0.9">Musibah tidak pernah memberi kabar lebih dulu.</div>
     </div>
-    <div class="abs" style="left:90px;right:90px;top:900px;background:rgba(255,255,255,.93);border-radius:34px;padding:30px 36px;" data-a="2.4" data-y="40">
-      <div style="display:flex;justify-content:space-between;font:500 26px var(--body);color:var(--muted);"><span>Pesan baru · Rizki</span><span>sekarang</span></div>
-      <p style="margin:14px 0 0;font:400 36px/1.45 var(--body);">Innalillahi wa inna ilaihi raji'un. Ayah kami, <strong>Bapak Sulaiman</strong>, baru saja berpulang subuh tadi.</p>
+    <div class="phone-wrap" data-a="0.2" data-f="1" data-y="40">
+      <div class="owner"><span><i style="background:#1d5a3e">P</i>HP Pengurus STM</span></div>
+      <div class="phone"><div class="screen">
+        <div class="lock">
+          <div class="status" data-status="04.52"></div>
+          <div class="clock">04.52</div>
+          <div class="date">Ahad, 12 Oktober</div>
+          <div class="notif" data-a="2.0" data-y="50" data-f="0.6">
+            <div class="app"><i data-icon="wa"></i>WhatsApp<em>sekarang</em></div>
+            <b>Rizki (putra Pak Sulaiman)</b>
+            <p>Assalamu'alaikum Pak. Innalillahi wa inna ilaihi raji'un. Ayah kami, <strong>Bapak Sulaiman</strong>, baru saja berpulang subuh tadi.</p>
+          </div>
+          <div class="hint">Geser ke atas untuk membuka</div>
+        </div>
+      </div></div>
     </div>
-    <div class="abs cap" style="left:90px;right:90px;top:1420px;text-align:center;font-style:italic;font-weight:500;" data-a="5.4" data-f="1">Musibah tidak pernah memberi kabar lebih dulu.</div>
   </section>
 
-  <!-- S2 · 9–20 · rumah duka sepi -->
-  <section class="scene" data-a="9" data-b="20" data-f="0.8" style="background: linear-gradient(#f2e3c8, #f7f0e2 55%);">
+  <!-- S2 · 9–24 · rumah duka sepi -->
+  <section class="scene" data-a="9" data-b="24" data-f="0.8" style="background: linear-gradient(#f2e3c8, #f7f0e2 55%);">
     <div class="top">
-      <div class="eyebrow" style="color:#9a7a2c" data-a="9.4">Pagi itu</div>
-      <div class="cap" style="color:var(--green)" data-a="9.8" data-b="13.6">Tenda sudah berdiri. Kursi sudah disusun.</div>
-      <div class="cap" style="color:var(--green)" data-a="13.9">Tapi yang datang hanya <em style="color:#a5812f">beberapa orang.</em></div>
+      <div class="eyebrow" style="color:#9a7a2c" data-a="9.4">Pagi itu, di rumah duka</div>
+      <div class="cap" style="color:var(--green)" data-a="9.8" data-b="14">Tenda sudah berdiri. Kursi sudah disusun.</div>
+      <div class="cap" style="color:var(--green)" data-a="14.3">Tapi yang datang hanya <em style="color:#a5812f">beberapa orang.</em></div>
     </div>
     <svg id="houseA" class="abs" style="left:0;top:470px" width="1080" height="972" viewBox="0 0 1000 900"></svg>
-    <p class="abs note" style="left:90px;right:90px;top:1500px;color:var(--ink);font-size:36px;" data-a="16.2">Bukan karena tak peduli. Kabar datang mendadak, semua punya kesibukan, dan masing-masing mengira <em>pasti sudah banyak yang datang.</em></p>
+    <p class="abs note" style="left:90px;right:90px;top:1500px;color:var(--ink);font-size:36px;" data-a="17">Bukan karena tidak peduli. Kabar datang mendadak, semua punya kesibukan, dan masing-masing mengira <strong>pasti sudah banyak yang datang.</strong></p>
   </section>
 
-  <!-- S3 · 20–25.5 · pertanyaan -->
-  <section class="scene" data-a="20" data-b="25.5" data-f="0.8" style="background: radial-gradient(100% 60% at 50% 40%, #1d5a3e, #0b2519);">
-    <img src="logo.png" class="abs" style="left:400px;top:520px;width:280px;height:280px;" data-a="20.4" data-f="1">
-    <div class="abs cap" style="left:100px;right:100px;top:900px;text-align:center;font-size:66px;" data-a="21.4" data-f="1">Bagaimana jika kita saling menjaga, <em>tanpa menambah beban siapa pun?</em></div>
+  <!-- S3 · 24–30 · pertanyaan -->
+  <section class="scene" data-a="24" data-b="30" data-f="0.8" style="background: radial-gradient(100% 60% at 50% 40%, #1d5a3e, #0b2519);">
+    <img src="logo.png" class="abs" style="left:400px;top:520px;width:280px;height:280px;" data-a="24.4" data-f="1">
+    <div class="abs cap" style="left:100px;right:100px;top:900px;text-align:center;font-size:66px;" data-a="25" data-f="1">Bagaimana jika kita saling menjaga, <em>tanpa menambah beban siapa pun?</em></div>
   </section>
 
-  <!-- S4 · 25.5–42 · kirim lokasi -->
-  <section class="scene" data-a="25.5" data-b="42" data-f="0.7" style="background: var(--deep);">
+  <!-- S4 · 30–46 · HP Pak Rahman: kirim lokasi -->
+  <section class="scene" data-a="30" data-b="46" data-f="0.7" style="background: var(--deep);">
     <div class="top">
-      <div class="eyebrow" data-a="25.8">Langkah 1 · cukup sekali</div>
-      <div class="cap" data-a="26.1">Anggota mengirim lokasi rumah lewat WhatsApp.</div>
+      <div class="eyebrow" data-a="30.3">Langkah 1 · cukup sekali</div>
+      <div class="cap" data-a="30.6">Anggota mengirim lokasi rumah lewat WhatsApp.</div>
     </div>
-    <div class="phone" data-a="26.2" data-y="60"><div class="screen">
-      <div class="chat-head"><img src="logo.png" alt=""><div><b>STM KIMDAS</b><span>pesan otomatis pengurus</span></div></div>
-      <div class="msgs" id="chat1"></div>
-    </div></div>
+    <div class="phone-wrap" data-a="30.4" data-y="60" data-phone="rahman1"></div>
   </section>
 
-  <!-- MAP LAYER · 42–121.5 -->
-  <section class="scene" id="mapScene" data-a="42" data-b="121.5" data-f="0.7" style="background: var(--deep);">
+  <!-- MAP LAYER · 46–121.5 -->
+  <section class="scene" data-a="46" data-b="121.5" data-f="0.7" style="background: var(--deep);">
     <div class="top">
-      <div class="eyebrow" data-a="42.3" data-b="54">Langkah 2 · peta anggota</div>
-      <div class="cap" data-a="42.6" data-b="54">Setiap lokasi menjadi satu titik di peta.</div>
+      <div class="eyebrow" data-a="46.3" data-b="56">Langkah 2 · peta anggota</div>
+      <div class="cap" data-a="46.6" data-b="56">Setiap lokasi menjadi satu titik di peta.</div>
 
-      <div class="eyebrow" data-a="54.3" data-b="70">05.10 · kabar duka masuk</div>
-      <div class="cap" data-a="54.6" data-b="58.4">Pengurus menandai rumah duka.</div>
-      <div class="cap" data-a="58.7" data-b="70" style="font-size:54px">Sistem memilih <em>15 anggota terdekat</em> yang belum lama mendapat giliran.</div>
+      <div class="eyebrow" data-a="56.3" data-b="70">05.10 · kabar duka masuk</div>
+      <div class="cap" data-a="56.6" data-b="60.4">Pengurus menandai rumah duka.</div>
+      <div class="cap" data-a="60.7" data-b="70">Sistem memilih <em>15 anggota terdekat.</em></div>
 
       <div class="eyebrow" data-a="86.3" data-b="99">05.15 – 06.30 · balasan masuk</div>
       <div class="cap" data-a="86.6" data-b="93.6">Satu per satu menjawab.</div>
@@ -148,22 +190,20 @@ body { font-family: var(--body); color: var(--ink); overflow: hidden; }
       <svg id="map" width="960" height="960" viewBox="0 0 1000 1000"></svg>
     </div>
 
-    <!-- panels -->
-    <div class="panel" data-a="43" data-b="54">
+    <div class="panel" data-a="47" data-b="56">
       <div class="card" style="display:flex;justify-content:space-between;align-items:center;">
         <div><h3 style="margin:0">Lokasi terdaftar</h3><p style="color:var(--muted)">anggota STM KIMDAS</p></div>
         <div id="regCount" style="font:700 96px/1 var(--body);color:var(--green);font-variant-numeric:tabular-nums">0</div>
       </div>
-      <div class="chips" data-a="49.5"><span class="chip">🔒 Hanya bisa dibuka pengurus</span><span class="chip">Titik dibulatkan ±100 m</span></div>
+      <div class="chips" data-a="51.5"><span class="chip">🔒 Hanya bisa dibuka pengurus</span><span class="chip">Titik dibulatkan ±100 m</span></div>
     </div>
 
-    <div class="panel" data-a="55.6" data-b="70">
+    <div class="panel" data-a="57.6" data-b="70">
       <div class="card"><h3>Alm. Bapak Sulaiman</h3><p>Gg. Muslimin · Shalat jenazah <strong>10.00</strong> · Pemakaman <strong>10.30</strong></p></div>
-      <div class="chips" data-a="61.5">
-        <span class="chip"><span class="dot" style="background:var(--gold)"></span>Diminta khusus · 15</span>
-        <span class="chip"><span class="dot" style="background:#8a8f88"></span>Baru dapat giliran · dilewati</span>
+      <div class="chips" data-a="62.6">
+        <span class="chip"><span class="dot" style="background:var(--gold)"></span>15 anggota terdekat diminta khusus</span>
       </div>
-      <p class="note" style="font-size:28px;margin:18px 0 0" data-a="64.8">Kabar duka tetap dikirim ke semua anggota.</p>
+      <p class="note" style="font-size:28px;margin:18px 0 0" data-a="65.5">Kabar duka tetap dikirim ke semua anggota.</p>
     </div>
 
     <div class="panel" data-a="87" data-b="99">
@@ -184,28 +224,22 @@ body { font-family: var(--body); color: var(--ink); overflow: hidden; }
     </div>
   </section>
 
-  <!-- S7 · 70–86 · HP Pak Rahman -->
+  <!-- S7 · 70–86 · HP Pak Rahman: permintaan khusus -->
   <section class="scene" data-a="70" data-b="86" data-f="0.7" style="background: var(--deep);">
     <div class="top">
-      <div class="eyebrow" data-a="70.3">Di HP Pak Rahman</div>
+      <div class="eyebrow" data-a="70.3">05.15 · pesan dari STM</div>
       <div class="cap" data-a="70.6">Sebuah permintaan pribadi, <em>bukan pengumuman.</em></div>
     </div>
-    <div class="phone" data-a="70.4" data-y="60"><div class="screen">
-      <div class="chat-head"><img src="logo.png" alt=""><div><b>STM KIMDAS</b><span>pesan otomatis pengurus</span></div></div>
-      <div class="msgs" id="chat2"></div>
-    </div></div>
+    <div class="phone-wrap" data-a="70.4" data-y="60" data-phone="rahman2"></div>
   </section>
 
-  <!-- S9 · 99–111 · HP keluarga -->
+  <!-- S9 · 99–111 · HP Rizki -->
   <section class="scene" data-a="99" data-b="111" data-f="0.7" style="background: var(--deep);">
     <div class="top">
-      <div class="eyebrow" data-a="99.3">Di HP keluarga</div>
-      <div class="cap" data-a="99.6">Mas Rizki, putra Almarhum.</div>
+      <div class="eyebrow" data-a="99.3">06.35 · kabar untuk keluarga</div>
+      <div class="cap" data-a="99.6">Keluarga tahu mereka <em>tidak sendirian.</em></div>
     </div>
-    <div class="phone" data-a="99.4" data-y="60"><div class="screen">
-      <div class="chat-head"><img src="logo.png" alt=""><div><b>STM KIMDAS</b><span>pengurus</span></div></div>
-      <div class="msgs" id="chat3"></div>
-    </div></div>
+    <div class="phone-wrap" data-a="99.4" data-y="60" data-phone="rizki1"></div>
   </section>
 
   <!-- S10b · 121–130 · rumah penuh -->
@@ -219,47 +253,52 @@ body { font-family: var(--body); color: var(--ink); overflow: hidden; }
     <p class="abs note" style="left:90px;right:90px;top:1500px;color:var(--ink);font-size:36px;" data-a="126.4">14 anggota ikut menshalatkan dan mengantar Almarhum. Santunan ta'awun diserahkan kepada keluarga.</p>
   </section>
 
-  <!-- S11 · 130–142 · sore harinya -->
-  <section class="scene" data-a="130" data-b="142" data-f="0.8" style="background: radial-gradient(110% 70% at 50% 35%, #1d5a3e, #0b2519);">
-    <div class="top"><div class="eyebrow" data-a="130.3">Sore harinya</div></div>
-    <div class="quote" style="top:330px" data-a="130.8" data-y="40">
-      <div class="who">STM KIMDAS → anggota yang hadir</div>
-      <p>Alhamdulillah, <strong>14 anggota</strong> berta'ziyah hari ini. Semoga Allah merahmati Almarhum dan membalas setiap langkah Bapak-bapak. Jazakumullah khairan.</p>
+  <!-- S11a · 130–136.5 · HP Pak Rahman: terima kasih -->
+  <section class="scene" data-a="130" data-b="136.5" data-f="0.7" style="background: var(--deep);">
+    <div class="top">
+      <div class="eyebrow" data-a="130.3">Siang harinya</div>
+      <div class="cap" data-a="130.6">Ucapan terima kasih untuk yang hadir.</div>
     </div>
-    <div class="quote fam" style="top:880px" data-a="134.6" data-y="40" data-f="0.9">
-      <div class="who">Rizki · keluarga Almarhum</div>
-      <p>Pak, terima kasih. Tadi pagi kami kira akan sendirian. Ternyata rumah penuh. Ibu sampai menangis melihatnya.</p>
-    </div>
+    <div class="phone-wrap" data-a="130.4" data-y="60" data-phone="rahman3"></div>
   </section>
 
-  <!-- S12 · 142–151 -->
-  <section class="scene" data-a="142" data-b="151" data-f="1" style="background:#07130d;">
-    <div class="abs cap" style="left:100px;right:100px;top:700px;font-size:76px;" data-a="142.6" data-f="1.2">Lima belas menit kehadiran Bapak,</div>
-    <div class="abs cap" style="left:100px;right:100px;top:930px;font-size:76px;" data-a="145.6" data-f="1.4"><em>mungkin itulah yang paling lama mereka ingat.</em></div>
+  <!-- S11b · 136.5–145 · HP Rizki: balasan keluarga -->
+  <section class="scene" data-a="136.5" data-b="145" data-f="0.7" style="background: var(--deep);">
+    <div class="top">
+      <div class="eyebrow" data-a="136.8">Sore harinya</div>
+      <div class="cap" data-a="137.1">Rizki mengirim pesan ke STM.</div>
+    </div>
+    <div class="phone-wrap" data-a="136.9" data-y="60" data-phone="rizki2"></div>
   </section>
 
-  <!-- S13 · 151–159 · wakaf -->
-  <section class="scene" data-a="151" data-b="159" data-f="1" style="background: linear-gradient(170deg, #2b5a3d, #10301f 60%);">
+  <!-- S12 · 145–154 -->
+  <section class="scene" data-a="145" data-b="154" data-f="1" style="background:#07130d;">
+    <div class="abs cap" style="left:100px;right:100px;top:700px;font-size:76px;" data-a="145.6" data-f="1.2">Lima belas menit kehadiran kita,</div>
+    <div class="abs cap" style="left:100px;right:100px;top:930px;font-size:76px;color:var(--gold-soft)" data-a="148.4" data-f="1.4">mungkin itulah yang paling lama mereka ingat.</div>
+  </section>
+
+  <!-- S13 · 154–162 · wakaf -->
+  <section class="scene" data-a="154" data-b="162" data-f="1" style="background: linear-gradient(170deg, #2b5a3d, #10301f 60%);">
     <svg class="abs" style="left:0;top:1180px" width="1080" height="740" viewBox="0 0 1080 740" id="field"></svg>
-    <div class="abs" style="left:100px;right:100px;top:520px;text-align:center" data-a="151.5">
+    <div class="abs" style="left:100px;right:100px;top:520px;text-align:center" data-a="154.5">
       <div class="eyebrow">Wakaf lahan pemakaman</div>
     </div>
-    <div class="abs cap" style="left:100px;right:100px;top:600px;text-align:center;font-size:66px" data-a="152" data-f="1">Dan kelak, insya Allah, ada <em>sepetak tanah</em> yang dekat untuk kita semua.</div>
-    <div class="abs note" style="left:100px;right:100px;top:930px;text-align:center" data-a="154.5">±2.296 m² · Desa Baru, Batang Kuis<br><strong style="color:var(--gold-soft)">kimdas.my.id/campaigns/6</strong></div>
+    <div class="abs cap" style="left:100px;right:100px;top:600px;text-align:center;font-size:66px" data-a="155" data-f="1">Dan kelak, insya Allah, ada <em>sepetak tanah</em> yang dekat untuk kita semua.</div>
+    <div class="abs note" style="left:100px;right:100px;top:930px;text-align:center" data-a="157.5">±2.296 m² · Desa Baru, Batang Kuis<br><strong style="color:var(--gold-soft)">kimdas.my.id/campaigns/6</strong></div>
   </section>
 
-  <!-- S14 · 159–168 · penutup -->
-  <section class="scene" data-a="159" data-b="167.4" data-f="1" style="background: radial-gradient(100% 60% at 50% 40%, #1d5a3e, #0b2519);">
-    <img src="logo.png" class="abs" style="left:390px;top:470px;width:300px;height:300px;" data-a="159.4" data-f="1">
-    <div class="abs" style="left:80px;right:80px;top:830px;text-align:center;color:#fff" data-a="160">
+  <!-- S14 · 162–171 · penutup -->
+  <section class="scene" data-a="162" data-b="170.4" data-f="1" style="background: radial-gradient(100% 60% at 50% 40%, #1d5a3e, #0b2519);">
+    <img src="logo.png" class="abs" style="left:390px;top:470px;width:300px;height:300px;" data-a="162.4" data-f="1">
+    <div class="abs" style="left:80px;right:80px;top:830px;text-align:center;color:#fff" data-a="163">
       <div style="font:700 92px/1 var(--display);letter-spacing:.08em">STM KIMDAS</div>
-      <div style="font:italic 500 36px/1.4 var(--display);color:var(--gold-soft);margin-top:18px">Kerukunan Ikhwah Masri dan Ahlussunnah Sekitar</div>
+      <div style="font:500 34px/1.4 var(--body);color:var(--gold-soft);margin-top:20px">Kerukunan Ikhwah Masri dan Ahlussunnah Sekitar</div>
     </div>
-    <div class="abs" style="left:110px;right:110px;top:1160px;text-align:center;background:var(--paper);border-radius:30px;padding:34px 30px" data-a="161.4" data-y="30">
+    <div class="abs" style="left:110px;right:110px;top:1160px;text-align:center;background:var(--paper);border-radius:30px;padding:34px 30px" data-a="164.4" data-y="30">
       <div style="font:600 40px/1.35 var(--body);color:var(--green)">Kirim lokasi rumah Anda ke nomor WhatsApp STM KIMDAS.</div>
       <div style="font:400 28px/1.4 var(--body);color:var(--muted);margin-top:10px">Cukup sekali. Data hanya untuk pengurus.</div>
     </div>
-    <div class="abs" style="left:80px;right:80px;top:1780px;text-align:center;font:400 24px var(--body);color:rgba(255,255,255,.55)" data-a="162">Nama, tempat, dan peta dalam video ini hanya ilustrasi.</div>
+    <div class="abs" style="left:80px;right:80px;top:1780px;text-align:center;font:400 24px var(--body);color:rgba(255,255,255,.55)" data-a="165">Nama, tempat, dan peta dalam video ini hanya ilustrasi.</div>
   </section>
 
 </div>
@@ -278,39 +317,85 @@ function svg(tag, attrs = {}, parent) {
 }
 function rng(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
 
-/* ---------- chats ---------- */
-const locCard = `<svg class="loc" viewBox="0 0 420 230"><rect width="420" height="230" fill="#e9ecdc"/><path d="M0 150 C120 130 260 170 420 120" stroke="#fff" stroke-width="18" fill="none"/><path d="M230 0 C220 90 250 160 210 230" stroke="#fff" stroke-width="12" fill="none"/><rect x="40" y="30" width="120" height="70" rx="10" fill="#dcdcc9"/><rect x="290" y="160" width="100" height="50" rx="10" fill="#dcdcc9"/><circle cx="212" cy="112" r="34" fill="#2f9a5f" opacity=".2"/><circle cx="212" cy="112" r="14" fill="#2f9a5f" stroke="#fff" stroke-width="5"/></svg><strong>📍 Lokasi saat ini</strong>`;
-const chats = {
-  chat1: [
-    [26.9, 'in', `Assalamu'alaikum Pak Rahman 🙏 Agar STM bisa cepat mengabari bila ada musibah di dekat rumah Bapak, mohon kirim <strong>lokasi rumah</strong> Bapak.<span class="hint">Caranya: tekan 📎 → Lokasi → Kirim lokasi saat ini (saat Bapak berada di rumah).</span>`, '20.14'],
-    [30.6, 'out', locCard, '20.16'],
-    [32.8, 'in', `Jazakallah khairan, lokasi tersimpan ✓<br>Data ini hanya untuk pengurus STM dan tidak dibagikan ke anggota lain.`, '20.16'],
-    [35.2, 'in', `Jika berkenan, Bapak bisa membantu dengan:<br><strong>1</strong> memandikan jenazah<br><strong>2</strong> memberi tumpangan<br><strong>3</strong> siap dihubungi`, '20.16'],
-    [37.6, 'out', `2 dan 3`, '20.18'],
-    [39.0, 'in', `Tercatat. Terima kasih, Pak 🙏`, '20.18'],
-  ],
-  chat2: [
+/* ---------- phone UI ---------- */
+const ICON = {
+  signal: '<svg viewBox="0 0 34 24"><rect x="0" y="16" width="6" height="8" rx="1" fill="#fff"/><rect x="9" y="11" width="6" height="13" rx="1" fill="#fff"/><rect x="18" y="6" width="6" height="18" rx="1" fill="#fff"/><rect x="27" y="0" width="6" height="24" rx="1" fill="#fff"/></svg>',
+  wifi: '<svg viewBox="0 0 32 24"><path d="M16 22 L2 7 A20 20 0 0 1 30 7 Z" fill="#fff"/></svg>',
+  batt: '<svg viewBox="0 0 48 24"><rect x="1" y="2" width="40" height="20" rx="5" fill="none" stroke="#fff" stroke-width="2.5"/><rect x="5" y="6" width="26" height="12" rx="2" fill="#fff"/><rect x="43" y="8" width="4" height="8" rx="1.5" fill="#fff"/></svg>',
+  video: '<svg viewBox="0 0 40 28" height="30"><rect x="1" y="3" width="26" height="22" rx="5" fill="#fff"/><path d="M29 10 L39 4 L39 24 L29 18 Z" fill="#fff"/></svg>',
+  call: '<svg viewBox="0 0 30 30" height="30"><path d="M7 2 L12 2 L14 9 L10 12 Q13 18 18 20 L21 16 L28 18 L28 23 Q28 28 22 28 Q4 25 2 8 Q2 2 7 2 Z" fill="#fff"/></svg>',
+  wa: '<svg viewBox="0 0 24 24" width="22"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" fill="#fff"/></svg>',
+  mic: '<svg viewBox="0 0 24 24" width="36"><rect x="8.5" y="3" width="7" height="12" rx="3.5" fill="#fff"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3" stroke="#fff" stroke-width="2" fill="none"/></svg>',
+  clip: '<svg viewBox="0 0 24 24" width="34"><path d="M16 7 L8.5 14.5 a2.5 2.5 0 0 0 3.5 3.5 L19 11 a4.5 4.5 0 0 0-6.4-6.4 L5.5 11.7" stroke="#8696a0" stroke-width="2" fill="none"/></svg>',
+  cam: '<svg viewBox="0 0 24 24" width="34"><rect x="3" y="7" width="18" height="13" rx="3" stroke="#8696a0" stroke-width="2" fill="none"/><circle cx="12" cy="13.5" r="3.5" stroke="#8696a0" stroke-width="2" fill="none"/><path d="M8 7 L10 4 H14 L16 7" stroke="#8696a0" stroke-width="2" fill="none"/></svg>',
+};
+const statusBar = time => `<span>${time}</span><span style="display:flex;gap:12px;align-items:center">${ICON.signal}${ICON.wifi}${ICON.batt}</span>`;
+document.querySelectorAll('[data-status]').forEach(e => e.innerHTML = statusBar(e.dataset.status));
+document.querySelectorAll('[data-icon]').forEach(e => e.innerHTML = ICON[e.dataset.icon]);
+
+const locCard = `<svg class="loc" viewBox="0 0 430 230"><rect width="430" height="230" fill="#e9ecdc"/><path d="M0 150 C120 130 260 170 430 120" stroke="#fff" stroke-width="18" fill="none"/><path d="M230 0 C220 90 250 160 210 230" stroke="#fff" stroke-width="12" fill="none"/><rect x="40" y="30" width="120" height="70" rx="10" fill="#dcdcc9"/><rect x="290" y="160" width="100" height="50" rx="10" fill="#dcdcc9"/><circle cx="212" cy="112" r="34" fill="#2f9a5f" opacity=".2"/><circle cx="212" cy="112" r="14" fill="#2f9a5f" stroke="#fff" stroke-width="5"/></svg><strong>📍 Lokasi saat ini</strong>`;
+
+const STM = { label: 'STM KIMDAS', color: '#0f7b5f' };
+const PEOPLE = {
+  rahman: { owner: 'HP Pak Rahman', sub: 'anggota STM', initial: 'R', color: '#3a6fa8', me: 'Pak Rahman (Anda)', meColor: '#3a6fa8' },
+  rizki: { owner: 'HP Rizki', sub: 'putra Almarhum', initial: 'Ri', color: '#8a5a2b', me: 'Rizki (Anda)', meColor: '#8a5a2b' },
+};
+// [appear time, side, html, time, extra]  in = from STM KIMDAS, out = from phone owner
+const PHONES = {
+  rahman1: { who: 'rahman', clock: '20.18', date: 'Kamis', msgs: [
+    [31.4, 'in', `Assalamu'alaikum Pak Rahman 🙏 Agar STM bisa cepat mengabari bila ada musibah di dekat rumah Bapak, mohon kirim <strong>lokasi rumah</strong> Bapak.<span class="hint">Caranya: tekan 📎 → Lokasi → Kirim lokasi saat ini (saat Bapak berada di rumah).</span>`, '20.14'],
+    [34.6, 'out', locCard, '20.16'],
+    [36.8, 'in', `Jazakallah khairan, lokasi tersimpan ✓<br>Data ini hanya untuk pengurus STM dan tidak dibagikan ke anggota lain.`, '20.16'],
+    [39.2, 'in', `Jika berkenan, Bapak bisa membantu dengan:<br><strong>1</strong> memandikan jenazah<br><strong>2</strong> memberi tumpangan<br><strong>3</strong> siap dihubungi`, '20.16'],
+    [41.6, 'out', `2 dan 3`, '20.18'],
+    [43.0, 'in', `Tercatat. Terima kasih, Pak 🙏`, '20.18'],
+  ] },
+  rahman2: { who: 'rahman', clock: '05.21', date: 'Hari ini', msgs: [
     [71.2, 'in', `Assalamu'alaikum Pak Rahman. Innalillahi wa inna ilaihi raji'un. <strong>Bapak Sulaiman</strong> (Gg. Muslimin, ±600 m dari rumah Bapak) wafat subuh tadi.<br><br>Bapak termasuk <strong>15 anggota yang kami mohon secara khusus</strong> untuk berta'ziyah.<br>🕙 Shalat jenazah 10.00<br>🕥 Pemakaman 10.30<span class="hint">Ta'ziyah singkat 15–20 menit sudah sangat berarti bagi keluarga.</span>`, '05.15'],
     [75.6, 'in', `Mohon balas:<br><strong>1</strong> · hadir hari ini<br><strong>2</strong> · besok<br><strong>3</strong> · berhalangan`, '05.15'],
     [79.2, 'out', `1`, '05.21', 'big'],
     [81.0, 'in', `Jazakallah khairan, Pak. Pengingat dan lokasi rumah duka kami kirim pukul 09.30.`, '05.21'],
-  ],
-  chat3: [
+  ] },
+  rahman3: { who: 'rahman', clock: '13.05', date: 'Hari ini', msgs: [
+    [131.2, 'in', `Alhamdulillah, <strong>14 anggota</strong> berta'ziyah hari ini.<br>Semoga Allah merahmati Almarhum dan membalas setiap langkah Bapak-bapak. Jazakumullah khairan 🙏`, '13.02'],
+    [133.8, 'out', `Aamiin. Alhamdulillah bisa hadir.`, '13.05'],
+  ] },
+  rizki1: { who: 'rizki', clock: '06.38', date: 'Hari ini', msgs: [
     [100.2, 'in', `Assalamu'alaikum Mas Rizki. Kami seluruh anggota STM KIMDAS turut berduka. Semoga Allah mengampuni dan merahmati Almarhum.`, '06.35'],
     [102.6, 'in', `Insya Allah <strong>12 anggota</strong> akan hadir menshalatkan Almarhum pukul 10.00. Santunan ta'awun juga akan kami serahkan langsung.`, '06.35'],
     [105.6, 'out', `Masya Allah… Jazakumullah khairan, Pak. Ibu kami lega sekali mendengarnya.`, '06.38'],
-  ],
+  ] },
+  rizki2: { who: 'rizki', clock: '16.42', date: 'Hari ini', msgs: [
+    [-1, 'in', `Insya Allah <strong>12 anggota</strong> akan hadir menshalatkan Almarhum pukul 10.00. Santunan ta'awun juga akan kami serahkan langsung.`, '06.35'],
+    [-1, 'out', `Masya Allah… Jazakumullah khairan, Pak. Ibu kami lega sekali mendengarnya.`, '06.38'],
+    [138.4, 'out', `Pak, terima kasih banyak. Tadi pagi kami kira akan sendirian. Ternyata rumah penuh. Ibu sampai menangis melihatnya. Semoga Allah membalas semua kebaikan Bapak-bapak.`, '16.42'],
+  ] },
 };
-for (const id in chats) {
-  const box = document.getElementById(id);
-  for (const [a, side, html, time, extra] of chats[id]) {
+const chats = {};
+document.querySelectorAll('[data-phone]').forEach(wrap => {
+  const cfg = PHONES[wrap.dataset.phone], p = PEOPLE[cfg.who];
+  wrap.innerHTML = `
+    <div class="owner"><span><i style="background:${p.color}">${p.initial}</i>${p.owner}<small>· ${p.sub}</small></span></div>
+    <div class="phone"><div class="screen">
+      <div class="status">${statusBar(cfg.clock)}</div>
+      <div class="chat-head"><span class="back">‹</span><img src="logo.png" alt=""><div class="who"><b>STM KIMDAS</b><span>akun resmi pengurus</span></div><div class="ico">${ICON.video}${ICON.call}</div></div>
+      <div class="wall"></div>
+      <div class="msgs"><div class="datechip">${cfg.date}</div></div>
+      <div class="inputbar"><div class="field">🙂<span style="flex:1">Ketik pesan</span>${ICON.clip}${ICON.cam}</div><div class="mic">${ICON.mic}</div></div>
+    </div></div>`;
+  const box = wrap.querySelector('.msgs');
+  const list = [];
+  for (const [a, side, html, time, extra] of cfg.msgs) {
     const d = document.createElement('div');
     d.className = `b ${side} ${extra || ''}`;
-    d.dataset.a = a; d.dataset.y = 24; d.dataset.f = .45;
-    d.innerHTML = `${html}<small>${time}${side === 'out' ? ' ✓✓' : ''}</small>`;
+    if (a >= 0) { d.dataset.a = a; d.dataset.y = 24; d.dataset.f = .45; }
+    const from = side === 'in' ? `<span class="from" style="color:${STM.color}">${STM.label}</span>` : `<span class="from" style="color:${p.meColor}">${p.me}</span>`;
+    d.innerHTML = `${extra === 'big' ? '' : from}${html}<small>${time}${side === 'out' ? ' <b>✓✓</b>' : ''}</small>`;
     box.appendChild(d);
+    list.push([a, d]);
   }
-}
+  chats[wrap.dataset.phone] = { box, list };
+});
 
 /* ---------- house illustration ---------- */
 const CHAIRS = [];
@@ -319,27 +404,22 @@ for (let r = 0; r < 3; r++) for (let c = 0; c < 7; c++) {
   CHAIRS.push({ x: 500 + (c - 3) * (112 + r * 12), y: 590 + r * 100, s });
 }
 const SHIRT = ['#ffffff', '#e9e4d6', '#2f6b4c', '#d9d4c4', '#7c8c80', '#f4f1ea', '#3c4a42'];
-function drawHouse(root, filled, base) {
+function drawHouse(root, filled) {
   const defs = svg('defs', {}, root);
   const g = svg('linearGradient', { id: root.id + 'sky', x1: 0, y1: 0, x2: 0, y2: 1 }, defs);
   svg('stop', { offset: 0, 'stop-color': '#f3dcb8' }, g); svg('stop', { offset: 1, 'stop-color': '#f7efe0' }, g);
   svg('rect', { width: 1000, height: 900, fill: `url(#${root.id}sky)` }, root);
   svg('circle', { cx: 820, cy: 170, r: 70, fill: '#f8e3b5' }, root);
   svg('rect', { y: 470, width: 1000, height: 430, fill: '#e6dcc4' }, root);
-  // trees
   for (const [x, y, r] of [[90, 330, 90], [170, 380, 70], [930, 340, 80]]) svg('circle', { cx: x, cy: y, r, fill: '#7f9d6f', opacity: .7 }, root);
-  // house
   svg('rect', { x: 260, y: 250, width: 480, height: 240, fill: '#f6f1e6', stroke: '#d8ceb6', 'stroke-width': 3 }, root);
   svg('path', { d: 'M230 260 L500 120 L770 260 Z', fill: '#1d5a3e' }, root);
   svg('rect', { x: 460, y: 340, width: 80, height: 150, fill: '#8a6a45' }, root);
-  for (const x of [300, 600]) { svg('rect', { x, y: 320, width: 100, height: 80, fill: '#cfe0e3', stroke: '#8a6a45', 'stroke-width': 6 }, root); }
-  // canopy (tenda)
+  for (const x of [300, 600]) svg('rect', { x, y: 320, width: 100, height: 80, fill: '#cfe0e3', stroke: '#8a6a45', 'stroke-width': 6 }, root);
   svg('rect', { x: 70, y: 420, width: 860, height: 30, fill: '#e9eef0' }, root);
   for (let i = 0; i < 18; i++) svg('path', { d: `M${70 + i * 47.8} 450 q23.9 30 47.8 0`, fill: i % 2 ? '#2f6b4c' : '#e9eef0' }, root);
   svg('rect', { x: 90, y: 450, width: 10, height: 330, fill: '#9aa3a0' }, root);
   svg('rect', { x: 900, y: 450, width: 10, height: 330, fill: '#9aa3a0' }, root);
-  // chairs + people
-  const people = [];
   CHAIRS.forEach((ch, i) => {
     const gg = svg('g', { transform: `translate(${ch.x} ${ch.y}) scale(${ch.s})` }, root);
     const f = filled.find(p => p.i === i);
@@ -347,9 +427,9 @@ function drawHouse(root, filled, base) {
       const person = svg('g', { 'data-a': f.a, 'data-y': 18, 'data-f': .5 }, gg);
       svg('rect', { x: -32, y: -78, width: 64, height: 90, rx: 26, fill: SHIRT[i % SHIRT.length], stroke: '#00000018', 'stroke-width': 2 }, person);
       svg('circle', { cx: 0, cy: -104, r: 26, fill: ['#c99f7d', '#b88a66', '#d4ab88'][i % 3] }, person);
-      svg('path', { d: 'M-25 -112 Q0 -140 25 -112 L25 -118 Q0 -146 -25 -118 Z', fill: i % 4 === 1 ? '#ffffff' : '#1a1a1a' }, person);
-      svg('rect', { x: -26, y: -122, width: 52, height: 14, rx: 4, fill: i % 4 === 1 ? '#ffffff' : '#1a1a1a' }, person);
-      people.push(person);
+      const cap = i % 4 === 1 ? '#ffffff' : '#1a1a1a';
+      svg('path', { d: 'M-25 -112 Q0 -140 25 -112 L25 -118 Q0 -146 -25 -118 Z', fill: cap }, person);
+      svg('rect', { x: -26, y: -122, width: 52, height: 14, rx: 4, fill: cap }, person);
     }
     svg('rect', { x: -40, y: -30, width: 80, height: 14, rx: 6, fill: '#3a6fa8', opacity: .9 }, gg);
     svg('rect', { x: -40, y: 0, width: 80, height: 16, rx: 6, fill: '#3a6fa8' }, gg);
@@ -361,12 +441,11 @@ drawHouse($('#houseA'), [{ i: 3, a: 10.4 }, { i: 15, a: 11.2 }, { i: 9, a: 12 }]
 const fullOrder = [10, 3, 17, 8, 12, 1, 15, 5, 19, 9, 14, 2, 16, 11, 4, 18, 7, 13];
 drawHouse($('#houseB'), fullOrder.map((i, k) => ({ i, a: 121.6 + k * 0.22 })));
 
-/* ---------- field (wakaf) ---------- */
 (() => {
   const f = $('#field');
   for (let r = 0; r < 9; r++) {
     const y = 40 + r * r * 9 + r * 30;
-    svg('path', { d: `M0 ${y} Q540 ${y - 20} 1080 ${y}`, stroke: '#8fbf7a', 'stroke-opacity': .25 + r * .05, 'stroke-width': 2 + r, fill: 'none' }, f);
+    svg('path', { d: `M0 ${y} Q540 ${y - 20} 1080 ${y}`, stroke: '#8fbf7a', 'stroke-opacity': .2 + r * .04, 'stroke-width': 2 + r, fill: 'none' }, f);
   }
 })();
 
@@ -375,13 +454,12 @@ const map = $('#map');
 const DUKA = { x: 528, y: 548 };
 (() => {
   svg('rect', { width: 1000, height: 1000, fill: '#eef0e3' }, map);
-  const fields = [[40, 40, 220, 160], [760, 40, 210, 150], [40, 860, 260, 120], [820, 560, 160, 140]];
-  for (const [x, y, w, h] of fields) {
+  for (const [x, y, w, h] of [[40, 40, 220, 160], [760, 40, 210, 150], [40, 860, 260, 120], [820, 560, 160, 140]]) {
     svg('rect', { x, y, width: w, height: h, rx: 14, fill: '#dde9cf' }, map);
     for (let k = 12; k < h; k += 16) svg('line', { x1: x + 10, x2: x + w - 10, y1: y + k, y2: y + k, stroke: '#cbdcb9', 'stroke-width': 3 }, map);
   }
-  const blocks = [[180, 210, 280, 190], [600, 150, 240, 190], [360, 480, 330, 200], [120, 620, 260, 220], [660, 640, 260, 170], [470, 760, 230, 160]];
-  for (const [x, y, w, h] of blocks) svg('rect', { x, y, width: w, height: h, rx: 30, fill: '#e6e3d4' }, map);
+  for (const [x, y, w, h] of [[180, 210, 280, 190], [600, 150, 240, 190], [360, 480, 330, 200], [120, 620, 260, 220], [660, 640, 260, 170], [470, 760, 230, 160]])
+    svg('rect', { x, y, width: w, height: h, rx: 30, fill: '#e6e3d4' }, map);
   svg('path', { d: 'M0 905 C220 860 380 960 620 900 S880 840 1000 880', stroke: '#b9d5dc', 'stroke-width': 34, fill: 'none' }, map);
   const roads = [
     ['M0 455 C300 435 640 490 1000 425', 30], ['M575 0 C548 300 590 620 520 1000', 26],
@@ -400,7 +478,6 @@ const DUKA = { x: 528, y: 548 };
   label(690, 830, 'PERCUT', { size: 22, w: 600, ls: 5, fill: '#a3a796' });
 })();
 
-// members
 const R = rng(20251008);
 const clusters = [[300, 300, 70, 9], [710, 250, 70, 9], [530, 560, 110, 18], [250, 720, 80, 10], [780, 720, 70, 9], [590, 840, 60, 7], [880, 470, 40, 3], [90, 520, 40, 3]];
 const M = [];
@@ -410,95 +487,80 @@ for (const [cx, cy, sp, n] of clusters) for (let k = 0; k < n; k++) {
   while ((Math.hypot(x - DUKA.x, y - DUKA.y) < 45 || M.some(m => Math.hypot(m.x - x, m.y - y) < 26)) && tries < 60);
   M.push({ x, y });
 }
-M.forEach(m => m.d = Math.hypot(m.x - DUKA.x, m.y - DUKA.y));
+M.forEach(m => { m.d = Math.hypot(m.x - DUKA.x, m.y - DUKA.y); m.order = R(); });
 const byDist = M.map((m, i) => i).sort((a, b) => M[a].d - M[b].d);
-const recent = [byDist[1], byDist[4], byDist[6]];
-const pool = byDist.filter(i => !recent.includes(i));
-const chosen = pool.slice(0, 15), topup = pool.slice(15, 20);
-const extras = [pool[22], pool[26]];
+const chosen = byDist.slice(0, 15), topup = byDist.slice(15, 20);
+const extras = [byDist[24], byDist[28]];
 const ans1 = ['1','1','3','1','2','1','3','1','1','3','2','1','3','3','1'];
 const ans2 = ['1','1','3','1','1'];
-M.forEach((m, i) => { m.order = R(); });
-chosen.forEach((i, k) => { M[i].sel = 61 + k * .12; M[i].ans = ans1[k]; M[i].at = 87.6 + k * .42; });
+chosen.forEach((i, k) => { M[i].sel = 62.6 + k * .12; M[i].ans = ans1[k]; M[i].at = 87.6 + k * .42; });
 topup.forEach((i, k) => { M[i].sel = 95.6 + k * .14; M[i].ans = ans2[k]; M[i].at = 96.6 + k * .4; });
-recent.forEach(i => M[i].recent = true);
 extras.forEach(i => { M[i].extra = true; });
 const goers = [...chosen, ...topup].filter(i => M[i].ans === '1').concat(extras);
 goers.forEach((i, k) => { M[i].go = 114.6 + k * .2; });
+M.map((m, i) => i).sort((a, b) => M[a].order - M[b].order).forEach((i, k) => { M[i].drop = 47.2 + k * .095; });
 const r1 = M[chosen[14]].d + 22, r2 = M[topup[4]].d + 22;
 
-const gRings = svg('g', {}, map);
-const ring1 = svg('circle', { cx: DUKA.x, cy: DUKA.y, r: 0, fill: 'rgba(201,162,74,.10)', stroke: '#c9a24a', 'stroke-width': 3, 'stroke-dasharray': '10 8' }, gRings);
-const ring2 = svg('circle', { cx: DUKA.x, cy: DUKA.y, r: 0, fill: 'none', stroke: '#c9a24a', 'stroke-width': 3, 'stroke-dasharray': '10 8' }, gRings);
+const ring1 = svg('circle', { cx: DUKA.x, cy: DUKA.y, r: 0, fill: 'rgba(201,162,74,.10)', stroke: '#c9a24a', 'stroke-width': 3, 'stroke-dasharray': '10 8' }, map);
+const ring2 = svg('circle', { cx: DUKA.x, cy: DUKA.y, r: 0, fill: 'none', stroke: '#c9a24a', 'stroke-width': 3, 'stroke-dasharray': '10 8' }, map);
 const gTrails = svg('g', {}, map);
 const gPins = svg('g', {}, map);
-M.forEach((m, i) => {
+M.forEach(m => {
   m.trail = svg('line', { x1: m.x, y1: m.y, x2: m.x, y2: m.y, stroke: '#2f9a5f', 'stroke-width': 3, 'stroke-dasharray': '4 7', opacity: 0 }, gTrails);
   m.g = svg('g', {}, gPins);
   m.halo = svg('circle', { r: 21, fill: 'none', stroke: '#c9a24a', 'stroke-width': 5, opacity: 0 }, m.g);
   m.dot = svg('circle', { r: 11, fill: '#6f8a78', stroke: '#fff', 'stroke-width': 3.5 }, m.g);
-  m.mark = svg('text', { x: 15, y: -14, 'font-family': 'Poppins', 'font-size': 18, 'font-weight': 600, fill: '#6f746c', opacity: 0 }, m.g);
-  m.mark.textContent = m.recent ? '↺' : '';
 });
-const duka = svg('g', { transform: `translate(${DUKA.x} ${DUKA.y})` }, map);
+const duka = svg('g', {}, map);
 const pulse = svg('circle', { r: 30, fill: '#1d5a3e', opacity: 0 }, duka);
-const dukaBody = svg('g', {}, duka);
-svg('circle', { r: 28, fill: '#13261c', stroke: '#c9a24a', 'stroke-width': 5 }, dukaBody);
-svg('path', { d: 'M-13 4 L0 -10 L13 4 L13 14 L-13 14 Z', fill: '#f6f0e3' }, dukaBody);
-const dukaLabel = svg('g', {}, duka);
-svg('rect', { x: -95, y: -92, width: 190, height: 46, rx: 23, fill: '#13261c' }, dukaLabel);
-const dl = svg('text', { x: 0, y: -61, 'text-anchor': 'middle', 'font-family': 'Poppins', 'font-size': 21, 'font-weight': 600, fill: '#e8d39b' }, dukaLabel); dl.textContent = 'Rumah duka';
+svg('circle', { r: 28, fill: '#13261c', stroke: '#c9a24a', 'stroke-width': 5 }, duka);
+svg('path', { d: 'M-13 4 L0 -10 L13 4 L13 14 L-13 14 Z', fill: '#f6f0e3' }, duka);
+svg('rect', { x: -95, y: -92, width: 190, height: 46, rx: 23, fill: '#13261c' }, duka);
+const dl = svg('text', { x: 0, y: -61, 'text-anchor': 'middle', 'font-family': 'Poppins', 'font-size': 21, 'font-weight': 600, fill: '#e8d39b' }, duka); dl.textContent = 'Rumah duka';
 
-const COLORS = { base: '#6f8a78', '1': '#2f9a5f', '2': '#c9a24a', '3': '#a9aaa2', recent: '#8a8f88' };
+const COLORS = { base: '#6f8a78', '1': '#2f9a5f', '2': '#c9a24a', '3': '#a9aaa2' };
 function renderMap(t) {
-  let reg = 0;
-  const sorted = M.map((m, i) => i).sort((a, b) => M[a].order - M[b].order);
-  sorted.forEach((i, k) => { M[i].drop = 43.2 + k * .095; });
-  let hadir = 0, besok = 0, halang = 0;
+  let reg = 0, hadir = 0, besok = 0, halang = 0;
   for (const m of M) {
     const p = easeOut((t - m.drop) / .45);
     if (t >= m.drop + .2) reg++;
-    let x = m.x, y = m.y - (1 - p) * 40;
-    let fill = COLORS.base, halo = 0, op = p;
-    if (m.recent && t > 60.4) { fill = COLORS.recent; m.mark.setAttribute('opacity', clamp((t - 60.4) / .4)); }
+    let x = m.x, y = m.y - (1 - p) * 40, fill = COLORS.base, halo = 0, op = p, big = 1;
     if (m.sel && t > m.sel) halo = clamp((t - m.sel) / .3);
     if (m.at && t > m.at) {
       fill = COLORS[m.ans];
-      if (t < m.at + 99) { if (m.ans === '1') hadir++; else if (m.ans === '2') besok++; else halang++; }
+      if (m.ans === '1') hadir++; else if (m.ans === '2') besok++; else halang++;
+      if (t < m.at + .5) big = 1 + .5 * Math.sin(Math.PI * (t - m.at) / .5);
     }
     if (m.extra && t > 114.4) fill = COLORS['1'];
-    let big = 1;
-    if (m.at && t > m.at && t < m.at + .5) big = 1 + .5 * Math.sin(Math.PI * (t - m.at) / .5);
-    if (t > 111 && !(m.go)) op = p * .35;
+    if (t > 111 && !m.go) op = p * .35;
+    if (t > 111) halo = 0;
     if (m.go) {
       const g = ease((t - m.go) / 3.6);
       x = m.x + (DUKA.x - m.x) * g * .9; y = m.y + (DUKA.y - m.y) * g * .9;
       m.trail.setAttribute('x2', x); m.trail.setAttribute('y2', y);
       m.trail.setAttribute('opacity', g > 0 ? .8 : 0);
-      if (t > 111) halo = 0;
     }
     m.g.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${big.toFixed(3)})`);
     m.g.setAttribute('opacity', op.toFixed(3));
     m.dot.setAttribute('fill', fill);
-    m.halo.setAttribute('opacity', (halo * (t > 111 ? 0 : 1)).toFixed(2));
+    m.halo.setAttribute('opacity', halo.toFixed(2));
   }
   $('#regCount').textContent = reg;
   $('#sHadir').textContent = hadir; $('#sBesok').textContent = besok; $('#sHalang').textContent = halang;
-  const dp = easeOut((t - 55.2) / .6);
+  const dp = easeOut((t - 57.2) / .6);
   duka.setAttribute('opacity', dp);
   duka.setAttribute('transform', `translate(${DUKA.x} ${DUKA.y - (1 - dp) * 50})`);
-  const ph = ((t - 55.2) % 1.6) / 1.6;
-  pulse.setAttribute('r', 28 + ph * 50); pulse.setAttribute('opacity', t > 55.2 ? (1 - ph) * .35 : 0);
-  ring1.setAttribute('r', (r1 * ease((t - 58.6) / 2.2)).toFixed(1));
-  ring1.setAttribute('opacity', t > 111 ? clamp(1 - (t - 111)) : 1);
-  ring2.setAttribute('r', (r2 * ease((t - 94.4) / 1.4)).toFixed(1));
-  ring2.setAttribute('opacity', t > 111 ? clamp(1 - (t - 111)) : 1);
+  const ph = (((t - 57.2) % 1.6) + 1.6) % 1.6 / 1.6;
+  pulse.setAttribute('r', 28 + ph * 50); pulse.setAttribute('opacity', t > 57.2 ? (1 - ph) * .35 : 0);
+  const fade = t > 111 ? clamp(1 - (t - 111)) : 1;
+  ring1.setAttribute('r', (r1 * ease((t - 60.4) / 2.2)).toFixed(1)); ring1.setAttribute('opacity', fade);
+  ring2.setAttribute('r', (r2 * ease((t - 94.4) / 1.4)).toFixed(1)); ring2.setAttribute('opacity', fade);
 }
 
 /* ---------- generic timeline ---------- */
 const anims = [...document.querySelectorAll('[data-a]')].map(el => ({
   el, a: +el.dataset.a, b: el.dataset.b ? +el.dataset.b : null, f: +(el.dataset.f || .6), y: +(el.dataset.y || 20),
-  svg: el instanceof SVGElement,
+  svg: el instanceof SVGElement, scene: el.classList.contains('scene'),
 }));
 function render(t) {
   for (const n of anims) {
@@ -508,27 +570,26 @@ function render(t) {
     n.el.style.opacity = op.toFixed(3);
     const dy = (1 - i) * n.y;
     if (n.svg) n.el.setAttribute('transform', `translate(0 ${dy.toFixed(1)})`);
-    else if (!n.el.classList.contains('scene')) n.el.style.transform = dy ? `translateY(${dy.toFixed(1)}px)` : '';
+    else if (!n.scene) n.el.style.transform = dy ? `translateY(${dy.toFixed(1)}px)` : '';
     n.el.style.visibility = op <= 0.001 ? 'hidden' : 'visible';
   }
   renderMap(t);
   // chat auto-scroll: keep the newest bubble in view
   for (const id in chats) {
-    const box = document.getElementById(id), kids = [...box.children];
-    const room = box.clientHeight - 30;
+    const { box, list } = chats[id];
+    const room = box.clientHeight - 24;
     let prev = 0, scroll = 0;
-    kids.forEach((k, j) => {
+    for (const [a, k] of list) {
       const need = Math.max(0, k.offsetTop + k.offsetHeight - room);
-      scroll += (need - prev) * ease((t - chats[id][j][0] + .15) / .55);
+      scroll += (need - prev) * (a < 0 ? 1 : ease((t - a + .15) / .55));
       prev = Math.max(prev, need);
-    });
+    }
     box.style.transform = `translateY(${-scroll.toFixed(1)}px)`;
   }
 }
-window.DURATION = 168;
+window.DURATION = 171;
 window.render = render;
 
-// live preview: ?play, or ?t=SECONDS for a still
 const q = new URLSearchParams(location.search);
 function fit() { const s = Math.min(innerWidth / 1080, innerHeight / 1920); $('#stage').style.transform = q.has('render') ? '' : `scale(${s})`; }
 fit(); addEventListener('resize', fit);
