@@ -303,6 +303,7 @@ em { font-style: normal; }
 
 </div>
 
+<script src="timing.js"></script>
 <script>
 const $ = s => document.querySelector(s);
 const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
@@ -562,7 +563,7 @@ const anims = [...document.querySelectorAll('[data-a]')].map(el => ({
   el, a: +el.dataset.a, b: el.dataset.b ? +el.dataset.b : null, f: +(el.dataset.f || .6), y: +(el.dataset.y || 20),
   svg: el instanceof SVGElement, scene: el.classList.contains('scene'),
 }));
-function render(t) {
+function renderSrc(t) {
   for (const n of anims) {
     const i = easeOut((t - n.a) / n.f);
     const o = n.b == null ? 1 : easeOut((n.b - t) / Math.min(n.f, .6));
@@ -587,7 +588,17 @@ function render(t) {
     box.style.transform = `translateY(${-scroll.toFixed(1)}px)`;
   }
 }
-window.DURATION = 171;
+// timing.js (dibuat narasi.py) memetakan waktu video bersuara ke waktu animasi di atas
+const WARP = window.WARP || [[0, 0], [171, 171]];
+function srcTime(t) {
+  for (let k = 1; k < WARP.length; k++) {
+    const [o0, s0] = WARP[k - 1], [o1, s1] = WARP[k];
+    if (t <= o1) return s0 + (t - o0) * (s1 - s0) / (o1 - o0);
+  }
+  return t - WARP[WARP.length - 1][0] + WARP[WARP.length - 1][1];
+}
+function render(t) { renderSrc(srcTime(t)); }
+window.DURATION = WARP[WARP.length - 1][0];
 window.render = render;
 
 const q = new URLSearchParams(location.search);

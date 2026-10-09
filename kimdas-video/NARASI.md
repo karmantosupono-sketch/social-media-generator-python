@@ -12,7 +12,7 @@ Penulisan sengaja disesuaikan supaya ElevenLabs melafalkannya dengan benar:
 - Model: **Eleven Multilingual v2**, bahasa Indonesia
 - Suara: laki-laki, tenang dan hangat (cari "calm", "narrator", atau "warm")
 - Stability sekitar 55%, Similarity sekitar 75%, Style 0–10%, Speed 0.9
-- **Buat per potongan** (16 file), lalu taruh di CapCut sesuai jam mulainya. Cara ini jauh lebih mudah diselaraskan daripada satu file panjang.
+- **Buat per potongan** (16 file), simpan sebagai `narasi/01.mp3` … `narasi/16.mp3`, lalu jalankan `python3 narasi.py`. Skrip ini menaruh tiap potongan di jam mulainya dan memperpanjang adegan yang narasinya lebih panjang. Jam mulai di tabel di bawah adalah jam versi asli 2:51.
 
 ## Naskah per potongan
 

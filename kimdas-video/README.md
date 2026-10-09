@@ -1,12 +1,14 @@
 # Video simulasi ta'ziyah STM KIMDAS
 
-Video vertikal 1080×1920, 2 menit 51 detik, tanpa suara. Naskah narasi ada di `NARASI.md`.
+Video vertikal 1080×1920. Naskah narasi ada di `NARASI.md`.
 
 - `video.html` — sumber animasi. Buka dengan `?play` untuk pratinjau di browser, atau `?t=60` untuk melihat detik tertentu.
-- `render.js` — merender video: `node render.js video keluaran.mp4 30`
+- `render.js` — merender video tanpa suara: `node render.js video keluaran.mp4 30`
+- `narasi.py` — membuat video bersuara dari 16 rekaman di `narasi/`. Setiap adegan diperlambat secukupnya bila narasinya lebih panjang (tidak pernah dipersingkat), hasil petanya ditulis ke `timing.js`, lalu video dirender dan digabung dengan audionya: `python3 narasi.py`
+- `timing.js` — dibuat otomatis oleh `narasi.py`. Hapus file ini untuk kembali ke durasi asli 2:51.
 - Semua nama, alamat, dan titik di peta adalah ilustrasi (data dummy).
 
-## Alur adegan
+## Alur adegan (durasi asli, sebelum disesuaikan dengan narasi)
 
 | Detik | Adegan |
 |---|---|
